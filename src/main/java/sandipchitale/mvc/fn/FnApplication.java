@@ -26,10 +26,6 @@ public class FnApplication {
 					.body(request.param("word").get().toUpperCase());
 		}
 
-		boolean hasParam(ServerRequest request) {
-			return request.params().containsKey("who");
-		}
-
 		@Bean
 		static RouterFunction<ServerResponse> greetRoutes(GreetingController greetingController) {
 			return route()
