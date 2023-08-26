@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.function.*;
 
-import static org.springframework.web.servlet.function.RouterFunctions.route;
+import java.io.File;
 
 @SpringBootApplication
 public class FnApplication {
@@ -28,20 +28,20 @@ public class FnApplication {
 
 		@Bean
 		static RouterFunction<ServerResponse> greetRoutes(GreetingController greetingController) {
-			return route()
+			return RouterFunctions.route()
 					.path("/", (RouterFunctions.Builder builder) -> builder
 						.GET("/greet",
-								RequestPredicates.param("who", ((s) -> s != null)),
+								RequestPredicates.param("who", ((String s) -> s != null)),
 								greetingController::greet))
 					.build();
 		}
 
 		@Bean
 		static RouterFunction<ServerResponse> uppercaseRoutes(GreetingController greetingController) {
-			return route()
+			return RouterFunctions.route()
 					.path("/", (RouterFunctions.Builder builder) -> builder
 							.GET("/uppercase",
-									RequestPredicates.param("word", ((s) -> s != null)),
+									RequestPredicates.param("word", ((String s) -> s != null)),
 									greetingController::uppercase))
 							.build();
 		}
